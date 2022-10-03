@@ -173,11 +173,12 @@
 
     <div class="row justify-content">
         <!-- button crear -->
-    <button class="btn btn-primary btn-lg btn-block">Registrar</button>
+        <button class="btn btn-primary btn-lg btn-block">Registrar</button>
         <!-- button cancelar -->
         <a class="button" href="{{ route('formularioClientes.index') }}">
             Cancelar
         </a>
     </div>
+
 
 </div>
