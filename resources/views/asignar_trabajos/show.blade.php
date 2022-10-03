@@ -13,7 +13,7 @@
 </style>
 
 <!-- index formulario -->
-<h1>Asignar Tecnico a Formulario</h1>
+<h3>Asignar Tecnico a Formulario</h3>
 <!-- button crear formulario -->
 <!-- button volver -->
 

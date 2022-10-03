@@ -52,7 +52,7 @@
 </div>
 <br />
 @endcan
-@can('informe.create')
+@can('admin.users.index')
 <!-- Button Trabajos Asignados -->
 <div class="d-grid gap-2 col-5 mx-auto">
     <a href="{{url('trabajo_asignados')}}" class="btn btn-success">Trabajos Asignados</a>
@@ -66,7 +66,7 @@
 </div>
 <br />
 @endcan
-@can('control.index')
+@can('admin')
 <!-- Button Control Trabajo -->
 <div class="d-grid gap-2 col-5 mx-auto">
     <a href="{{url('control_trabajos')}}" class="btn btn-success">Control Trabajo</a>

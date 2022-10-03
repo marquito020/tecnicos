@@ -59,24 +59,30 @@ class MarcarControlTrabajoController extends Controller
             'required' => 'El :attribute es requerido',
         ];
         $this->validate($request, $campos, $mensaje);
-        $datosControlTrabajo = request()->except('_token');
-        ControlTrabajo::create([
-            'fecha' => $datosControlTrabajo['fecha'],
-            'hora_inicio' => $datosControlTrabajo['hora_inicio'],
-            'id_trabajo_asignado' => $datosControlTrabajo['id_trabajo_asignado'],
-            'latitude_inicio' => $datosControlTrabajo['lat'],
-            'longitude_inicio' => $datosControlTrabajo['lng'],
-        ]);
-        /* Update Formulario Cliente */
-        $formulario_cliente = FormularioCliente::find($datosControlTrabajo['id_trabajo_asignado']);
-        $formulario_cliente->estado = 'En proceso';
-        $formulario_cliente->save();
 
-        Tecnico::where('id', '=', auth()->user()->id)->update(['estado' => 'En Proceso']);
-        Tecnico::where('id', '=', auth()->user()->id)->update(['latitude' => $datosControlTrabajo['lat']]);
-        Tecnico::where('id', '=', auth()->user()->id)->update(['longitude' => $datosControlTrabajo['lng']]);
+        if ($request->distancia > 5) {
+            return redirect('marcar_control_trabajos')->with('mensaje', 'No se puede marcar el control de trabajo, porque la distancia es mayor a 9 metros');
+        } else {
 
-        return redirect('marcar_control_trabajos')->with('mensaje', 'Control de trabajo agregado con exito');
+            $datosControlTrabajo = request()->except('_token');
+            ControlTrabajo::create([
+                'fecha' => $datosControlTrabajo['fecha'],
+                'hora_inicio' => $datosControlTrabajo['hora_inicio'],
+                'id_trabajo_asignado' => $datosControlTrabajo['id_trabajo_asignado'],
+                'latitude_inicio' => $datosControlTrabajo['lat'],
+                'longitude_inicio' => $datosControlTrabajo['lng'],
+            ]);
+            /* Update Formulario Cliente */
+            $trabajo = TrabajoAsignado::findOrFail($datosControlTrabajo['id_trabajo_asignado']);
+            $formulario = FormularioCliente::findOrFail($trabajo->id_formulario_cliente);
+            FormularioCliente::where('id', '=', $formulario->id)->update(['estado' => 'En proceso']);
+
+            Tecnico::where('id', '=', auth()->user()->id)->update(['estado' => 'En Proceso']);
+            Tecnico::where('id', '=', auth()->user()->id)->update(['latitude' => $datosControlTrabajo['lat']]);
+            Tecnico::where('id', '=', auth()->user()->id)->update(['longitude' => $datosControlTrabajo['lng']]);
+
+            return redirect('marcar_control_trabajos')->with('mensaje', 'Control de trabajo agregado con exito');
+        }
     }
 
     /**
@@ -89,7 +95,8 @@ class MarcarControlTrabajoController extends Controller
     {
         //
         $marcar_control_trabajos = TrabajoAsignado::findOrFail($id);
-        return view('marcar_control_trabajos.show', compact('marcar_control_trabajos'));
+        $coordenasCliente = FormularioCliente::findOrFail($marcar_control_trabajos->formularioCliente->id);
+        return view('marcar_control_trabajos.show', compact('marcar_control_trabajos', 'coordenasCliente'));
     }
 
     /**
@@ -134,9 +141,9 @@ class MarcarControlTrabajoController extends Controller
             ]
         );
         /* Update Formulario Cliente */
-        $formulario_cliente = FormularioCliente::find($datosControlTrabajo['id_trabajo_asignado']);
-        $formulario_cliente->estado = 'Realizado';
-        $formulario_cliente->save();
+        $trabajo = TrabajoAsignado::findOrFail($datosControlTrabajo['id_trabajo_asignado']);
+        $formulario = FormularioCliente::findOrFail($trabajo->id_formulario_cliente);
+        FormularioCliente::where('id', '=', $formulario->id)->update(['estado' => 'Realizado']);
 
         /* Update Formulario Cliente */
         Tecnico::where('id', '=', auth()->user()->id)->update(['estado' => 'Disponible']);

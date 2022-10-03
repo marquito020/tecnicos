@@ -1,3 +1,4 @@
+@section('cliente_crea_formularios', 'is-active')
 <style>
     .text-center {
         text-align: center;
@@ -171,14 +172,11 @@
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVtBE9UAI6NcVr_uKbS8GytFUhhi65CiM&callback=initMap" type="text/javascript"></script>
     </div>
 
-    <div class="row justify-content">
-        <!-- button crear -->
-        <button class="btn btn-primary btn-lg btn-block">Registrar</button>
-        <!-- button cancelar -->
-        <a class="button" href="{{ route('formularioClientes.index') }}">
-            Cancelar
-        </a>
-    </div>
-
+    <!-- button crear -->
+    <button class="btn btn-primary btn-lg btn-block">Registrar</button>
+    <!-- button cancelar -->
+    <a class="button" href="{{ route('cliente_crea_formularios.index') }}">
+        Cancelar
+    </a>
 
 </div>

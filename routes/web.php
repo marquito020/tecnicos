@@ -96,4 +96,4 @@ Route::get('inicio', function () {
 })->name('inicio');
 
 /* Cliente crea formulario */
-Route::resource('cliente_crea_formulario', CrearFormularioClienteController::class);
+Route::resource('cliente_crea_formularios', CrearFormularioClienteController::class)->middleware('auth');

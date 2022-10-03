@@ -1,10 +1,10 @@
 @extends('inicio')
-
+@section('cliente_crea_formularios', 'is-active')
 @section('content')
 <!-- index formulario -->
-<h2>Formularios</h2>
+<h3>Formularios</h3>
 <div class="row justify-content">
-    <a href="{{url('cliente_crea_formulario/create')}}" class="button">Crear</a>
+    <a href="{{url('cliente_crea_formularios/create')}}" class="button">Crear</a>
     <!-- button volver -->
     <a href="{{ url('home') }}" class="button">Volver</a>
 </div>
@@ -31,9 +31,6 @@
             <td>{{ $formulario->servicio->nombre }}</td>
             <td>{{ $formulario->cliente->persona->nombre }}</td>
             <td>
-                <!-- button show -->
-                <a href="{{ route('cliente_crea_formulario.show',$formulario) }}" class="btn btn-primary">Ver</a>
-                |
                 <form action="{{ url('/cliente_crea_formulario/'.$formulario->id) }}" method="post" style="display:inline">
                     @csrf
                     {{ method_field('DELETE') }}
