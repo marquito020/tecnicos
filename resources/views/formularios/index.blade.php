@@ -1,12 +1,14 @@
 @extends('inicio')
-
+@section('formulario', 'is-active')
 @section('content')
 <!-- index formulario -->
 <h2>Formularios</h2>
-<!-- crear formuario -->
-<a href="{{ url('formularioClientes/create') }}" class="btn btn-success">Crear Formulario</a>
-<!-- button volver -->
-<a href="{{ url('home') }}" class="button">Volver</a>
+<div class="row justify-content">
+    <!-- crear formuario -->
+    <a href="{{ url('formularioClientes/create') }}" class="button">Crear Formulario</a>
+    <!-- button volver -->
+    <a href="{{ url('home') }}" class="button">Volver</a>
+</div>
 
 <table class="table table-night">
     <thead class="thead-night">

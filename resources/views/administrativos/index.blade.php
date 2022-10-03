@@ -1,11 +1,11 @@
 <!-- Index Administrativos -->
 @extends('inicio')
-
+@section('administativo', 'is-active')
 @section('content')
 
 <h2 class="card-header">{{ __('Administrativos') }}</h2>
 
-<a class="button" href="{{url('administrativos/create')}}">Crear Admini.</a>
+<a class="button" href="{{url('administrativos/create')}}">Crear Adminin</a>
 
 <table class="table table-night table-hover">
     <thead class="thead-night">

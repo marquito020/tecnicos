@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('trabajo_asignados', 'is-active')
 @section('content')
 
 <!-- index trabajo asignados -->
@@ -9,7 +9,6 @@
 
 <a href="{{ route('inicio') }}" class="button">Volver</a>
 
-<br>
 <table class="table table-night">
     <thead class="thead-night">
         <tr>
