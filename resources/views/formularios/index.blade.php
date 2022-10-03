@@ -33,12 +33,12 @@
             <td>{{ $formulario->cliente->persona->nombre }}</td>
             <td>
                 <!-- button show -->
-                <a href="{{ route('formularioClientes.show',$formulario) }}" class="button">Ver</a>
+                <a href="{{ route('formularioClientes.show',$formulario) }}" class="btn btn-primary">Ver</a>
                 |
                 <form action="{{ url('/formularioClientes/'.$formulario->id) }}" method="post" style="display:inline">
                     @csrf
                     {{ method_field('DELETE') }}
-                    <input type="submit" class="button" onclick="return confirm('¿Borrar?')" value="Borrar">
+                    <input type="submit" class="btn btn-danger" onclick="return confirm('¿Borrar?')" value="Borrar">
                 </form>
             </td>
         </tr>

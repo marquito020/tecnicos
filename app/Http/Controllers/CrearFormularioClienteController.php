@@ -28,13 +28,13 @@ class CrearFormularioClienteController extends Controller
         $datos['servicios'] = Servicio::all();
         /* cliente */
         $datos['clientes'] = Cliente::all();
-        return view('formularios.create', $datos);
+        return view('cliente_crea_formularios.create', $datos);
     }
 
     public function store(Request $request)
     {
         //
-        dd($request);
+        /* dd($request); */
         /* restriccion */
         $campos = [
             'descripcion' => 'required|string|max:100',
