@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 /* HasRoles */
-use Spatie\Permission\traits\HasRoles;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {

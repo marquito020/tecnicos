@@ -41,14 +41,14 @@ use App\Http\Controllers\MarcarControlTrabajoController;
 Auth::routes();
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('login');
 });
 
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 });
-Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::resource('tecnicos', TecnicoController::class)->middleware('auth');
 
