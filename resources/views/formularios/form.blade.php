@@ -1,3 +1,4 @@
+@section('cliente', 'is-active')
 <style>
     .text-center {
         text-align: center;

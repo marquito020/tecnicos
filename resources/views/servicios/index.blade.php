@@ -1,5 +1,6 @@
 <!-- layout -->
 @extends('inicio')
+@section('servicio', 'is-active')
 <!-- seccion -->
 @section('content')
 <h2 class="card-header">{{ __('Servicios') }}</h2>

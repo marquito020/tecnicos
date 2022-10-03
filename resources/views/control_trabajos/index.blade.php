@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('control_trabajos', 'is-active')
 @section('content')
 
 <!-- create index control trabajo -->

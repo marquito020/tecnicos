@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('marcar_control_trabajos', 'is-active')
 @section('content')
 
 <!-- index formulario -->

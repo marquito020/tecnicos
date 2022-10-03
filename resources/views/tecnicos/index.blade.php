@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('tecnico', 'is-active')
 @section('content')
 @if(Session::has('Mensaje'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">

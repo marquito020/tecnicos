@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('cliente', 'is-active')
 @section('content')
 
 @if(Session::has('Mensaje'))

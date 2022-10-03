@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('asistencia', 'is-active')
 @section('content')
 
 <!-- Create index asistencia -->

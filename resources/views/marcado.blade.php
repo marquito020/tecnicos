@@ -1,4 +1,5 @@
 @extends('inicio')
+@section('marcado', 'is-active')
 
 @section('content')
 

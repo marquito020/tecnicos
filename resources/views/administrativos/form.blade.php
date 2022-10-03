@@ -1,3 +1,4 @@
+@section('administativo', 'is-active')
 <!-- form administrativos -->
 <div class="form-group">
     <!-- Nombre -->

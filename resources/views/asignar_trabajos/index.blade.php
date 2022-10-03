@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('asignar_trabajos', 'is-active')
 @section('content')
 
 <!-- index formulario -->

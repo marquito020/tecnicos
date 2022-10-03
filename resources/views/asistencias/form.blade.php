@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('asistencia', 'is-active')
 @section('content')
 <!-- Form turno trabajador -->
 <div class="container">

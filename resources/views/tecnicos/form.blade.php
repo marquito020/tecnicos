@@ -1,3 +1,4 @@
+@section('tecnico', 'is-active')
 <h2>{{$Modo}} tecnico</h2>
 
 @if(count($errors)>0)
