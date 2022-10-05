@@ -12,7 +12,7 @@
     }
 </style>
 <!-- Create show asistencia -->
-<h2 class="card-header">{{ __('Asistencias') }}</h2>
+<h3 class="card-header">{{ __('Asistencias') }}</h3>
 <!-- Message -->
 @if(Session::has('Mensaje'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">

@@ -14,7 +14,7 @@
 @endif
 
 
-<h2>{{ __('Asistencias') }}</h2>
+<h3>{{ __('Asistencias') }}</h3>
 <!-- button home -->
 <a href="{{url('/home')}}" class="button">Volver</a>
 

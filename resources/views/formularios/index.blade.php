@@ -2,7 +2,7 @@
 @section('formulario', 'is-active')
 @section('content')
 <!-- index formulario -->
-<h2>Formularios</h2>
+<h3>Formularios</h3>
 <div class="row justify-content">
     <!-- crear formuario -->
     <a href="{{ url('formularioClientes/create') }}" class="button">Crear Formulario</a>

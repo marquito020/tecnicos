@@ -5,7 +5,7 @@
 
 <form action="{{url('/tecnicos')}}" method="POST" enctype="multipart/form-data">
     @csrf
-    @include('tecnicos.form',['Modo'=>'Crear'])
+    @include('tecnicos.form',['modo'=>'Crear'])
 </form>
 
 @endsection

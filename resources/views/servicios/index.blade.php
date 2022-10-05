@@ -3,7 +3,7 @@
 @section('servicio', 'is-active')
 <!-- seccion -->
 @section('content')
-<h2 class="card-header">{{ __('Servicios') }}</h2>
+<h3 class="card-header">{{ __('Servicios') }}</h3>
 <!-- Create index servicios -->
 <div class="row justify-content">
     <a class="button" href="{{url('servicios/create')}}">Agregar Servicio</a>

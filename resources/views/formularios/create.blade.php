@@ -4,7 +4,7 @@
 @section('content')
 <!-- crear formulario cliente -->
 
-    <h1>Crear formulario</h1>
+    <h3>Crear formulario</h3>
     <form action="{{ url('formularioClientes') }}" method="post" enctype="multipart/form-data">
         @csrf
         @include('formularios.form', ['modo'=>'Crear'])

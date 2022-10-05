@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- index trabajo asignados -->
-<h2>Trabajos Asignados</h2>
+<h3>Trabajos Asignados</h3>
 <!-- Button volver -->
 <!-- button home -->
 

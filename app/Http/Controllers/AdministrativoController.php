@@ -45,6 +45,23 @@ class AdministrativoController extends Controller
     {
         //
         /* restriccion */
+        /* Requiere */
+        $campos = [
+            'nombre' => 'required|string|max:100',
+            'apellido_paterno' => 'required|string|max:100',
+            'apellido_materno' => 'required|string|max:100',
+            'direccion' => 'required|string|max:100',
+            'ci' => 'required|string|max:8',
+            'celular' => 'required|string|max:9',
+            'email' => 'required|string|max:100',
+            'fecha_de_nacimiento' => 'required|date',
+            'profesion' => 'required|string|max:100',
+        ];
+        $mensaje = [
+            'required' => 'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
         $persona = Persona::create([
             'nombre'           => $request->nombre,
             'apellido_paterno' => $request->apellido_paterno,

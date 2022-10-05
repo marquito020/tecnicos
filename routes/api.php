@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApiAsistencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AutenticarController;
@@ -25,4 +26,7 @@ Route::post('/login', [AutenticarController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AutenticarController::class, 'logout']);
     Route::post('/datos', [AutenticarController::class, 'datos']);
+    Route::post('/datos_asistencia', [ApiAsistencia::class, 'datosAsistencia']);
+    Route::post('/marcar_asistencia_inicio', [ApiAsistencia::class, 'marcarEntrada']);
+    Route::post('/marcar_asistencia_fin', [ApiAsistencia::class, 'marcarSalida']);
 });
