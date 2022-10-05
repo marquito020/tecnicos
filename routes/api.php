@@ -29,4 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/datos_asistencia', [ApiAsistencia::class, 'datosAsistencia']);
     Route::post('/marcar_asistencia_inicio', [ApiAsistencia::class, 'marcarEntrada']);
     Route::post('/marcar_asistencia_fin', [ApiAsistencia::class, 'marcarSalida']);
+    Route::post('/datos_asistencia_total', [ApiAsistencia::class, 'datos_asistencia_total']);
+    Route::post('/trabajo_asignado', [ApiAsistencia::class, 'trabajo_asignado']);
+    Route::post('/trabajo_asignado_inicio', [ApiAsistencia::class, 'trabajo_asignado_inicio']);
+    Route::post('/trabajo_asignado_fin', [ApiAsistencia::class, 'trabajo_asignado_fin']);
 });

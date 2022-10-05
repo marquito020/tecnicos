@@ -81,8 +81,10 @@ class TrabajoAsignadoController extends Controller
      * @param  \App\Models\TrabajoAsignado  $trabajoAsignado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TrabajoAsignado $trabajoAsignado)
+    public function destroy($id)
     {
         //
+        TrabajoAsignado::destroy($id);
+        return redirect('trabajo_asignados');
     }
 }

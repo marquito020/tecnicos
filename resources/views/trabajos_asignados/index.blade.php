@@ -17,6 +17,7 @@
             <th>Formulario Cliente</th>
             <th>Tecnico</th>
             <th>Administrativo</th>
+            <th>Cliente</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -28,13 +29,12 @@
             <td>{{ $trabajo_asignado->formularioCliente->descripcion }}</td>
             <td>{{ $trabajo_asignado->tecnico->persona->nombre }}</td>
             <td>{{ $trabajo_asignado->administrativo->persona->nombre}}</td>
+            <td>{{$trabajo_asignado->formularioCliente->cliente->persona->nombre}}</td>
             <td>
-                <a href="{{ url('/trabajo_asignados/'.$trabajo_asignado->id.'/edit') }}">Editar</a>
-                |
                 <form action="{{ url('/trabajo_asignados/'.$trabajo_asignado->id) }}" method="post" style="display:inline">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
-                    <button class="btn btn-link" type="submit" onclick="return confirm('¿Borrar?');">Borrar</button>
+                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Borrar?');">Borrar</button>
                 </form>
             </td>
         </tr>
