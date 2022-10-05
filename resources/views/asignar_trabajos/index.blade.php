@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- index formulario -->
-<h3>Agregar Trabajo</h3>
+<h3>Asignar Trabajador</h3>
 <div class="row justify-content">
     <!-- button volver -->
     <a href="{{ url('home') }}" class="button">Volver</a>
@@ -30,8 +30,12 @@
             <td>{{ $formulario->servicio->nombre }}</td>
             <td>{{ $formulario->cliente->persona->nombre }}</td>
             <td>
-                <!-- button show -->
+                @if($formulario->estado == 'Pendiente')
                 <a href="{{ route('asignar_trabajos.show',$formulario) }}" class="btn btn-success">Asignar Tecnico</a>
+                <!-- button show -->
+                @else
+                Asignado
+                @endif
             </td>
         </tr>
         @endforeach
