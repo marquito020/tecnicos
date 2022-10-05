@@ -1,8 +1,9 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 @section('asistencia', 'is-active')
-@section('content')
+@section('content') -->
 <!-- Form turno trabajador -->
-<div class="container">
+
+<!-- <div class="container">
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -19,7 +20,7 @@
                                 </select>
                             </div>
                         </div>
-                        <br>
+                        <br> -->
 
 
 
@@ -27,15 +28,15 @@
                         <!-- @if (Auth()->user()->id_rol == 1)
                         @else -->
 
-                        @php
+                        <!-- @php
                         $marcado = DB::table('asistencias')
                         ->where('id_trabajador', Auth::user()->persona->id)
                         ->where('fecha', date('Y-m-d'))
                         ->where('hora_fin', null)
                         ->first();
                         @endphp
-
-                        @if (is_null($marcado))
+ -->
+                       <!--  @if (is_null($marcado))
                         <div>
                             <form action="{{ route('marcarEntrada') }}" method="POST">
                                 @csrf
@@ -62,11 +63,11 @@
                                     marcar horario de salida
                                 </button>
                                 @endif
-                        </div>
+                        </div> -->
                         <!-- @endif -->
                         <!-- Marcado -->
 
-                        <div class="form-group row mb-0">
+                        <!-- <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     Guardar
@@ -77,5 +78,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    @endsection
+    </div> -->
+<!--     @endsection -->

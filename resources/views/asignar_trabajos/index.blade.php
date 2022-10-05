@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- index formulario -->
-<h2>Agregar Trabajo</h2>
+<h3>Agregar Trabajo</h3>
 <div class="row justify-content">
     <!-- button volver -->
     <a href="{{ url('home') }}" class="button">Volver</a>

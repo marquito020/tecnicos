@@ -15,7 +15,7 @@
 </style>
 <!-- marcado -->
 <div class="card-body">
-    <h2>Marcar Horario</h2>
+    <h3>Marcar Horario</h3>
     <!-- Mensaje Error -->
     @if(count($errors)>0)
     <div class="alert alert-danger" role="alert">

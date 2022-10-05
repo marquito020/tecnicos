@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
     <title>Document</title>
 </head>
@@ -22,9 +19,23 @@
                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                 <label>Password</label>
             </div>
-            <button type="submit" class="btn btn-primary">
-                {{ __('Login') }}
+            <button class="submit" style="background-color: transparent; border-color: transparent;">
+                <a h="this.form.submit()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Ingresar
+                </a>
             </button>
+
+            <a href="{{ route('register') }}">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    Registrarse
+                </a>
         </form>
     </div>
 </body>

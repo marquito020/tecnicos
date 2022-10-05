@@ -3,7 +3,7 @@
 @section('administativo', 'is-active')
 @section('content')
 
-<h2 class="card-header">{{ __('Administrativos') }}</h2>
+<h3 class="card-header">{{ __('Administrativos') }}</h3>
 
 <a class="button" href="{{url('administrativos/create')}}">Crear Adminin</a>
 

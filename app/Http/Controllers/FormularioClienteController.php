@@ -53,6 +53,7 @@ class FormularioClienteController extends Controller
         /* dd($request); */
         /* restriccion */
         $campos = [
+            'id_cliente' => 'required|string|max:100',
             'descripcion' => 'required|string|max:100',
             'fecha' => 'required|date',
             'hora' => 'required|date_format:H:i',
