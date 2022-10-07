@@ -1,5 +1,5 @@
 @extends('inicio')
-
+@section('tecnico', 'is-active')
 @section('content')
 
 

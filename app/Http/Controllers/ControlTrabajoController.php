@@ -106,8 +106,11 @@ class ControlTrabajoController extends Controller
      * @param  \App\Models\ControlTrabajo  $controlTrabajo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ControlTrabajo $controlTrabajo)
+    public function destroy($ido)
     {
         //
+        $control_trabajo = ControlTrabajo::findOrFail($ido);
+        ControlTrabajo::destroy($ido);
+        return redirect('control_trabajos')->with('mensaje', 'Control de trabajo eliminado con exito');
     }
 }

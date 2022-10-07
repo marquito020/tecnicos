@@ -30,7 +30,7 @@
             <td>{{ $formulario->servicio->nombre }}</td>
             <td>{{ $formulario->cliente->persona->nombre }}</td>
             <td>
-                @if($formulario->estado == 'Pendiente')
+                @if($formulario->trabajo_asignado == null)
                 <a href="{{ route('asignar_trabajos.show',$formulario) }}" class="btn btn-success">Asignar Tecnico</a>
                 <!-- button show -->
                 @else

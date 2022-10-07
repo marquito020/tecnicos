@@ -107,9 +107,11 @@ class AdministrativoController extends Controller
      * @param  \App\Models\Administrativo  $administrativo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Administrativo $administrativo)
+    public function edit($id)
     {
         //
+        $administrativo = Administrativo::findOrFail($id);
+        return view('administrativos.edit', compact('administrativo'));
     }
 
     /**
@@ -130,8 +132,17 @@ class AdministrativoController extends Controller
      * @param  \App\Models\Administrativo  $administrativo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Administrativo $administrativo)
+    public function destroy($id)
     {
         //
+        $administrativo = Administrativo::findOrFail($id);
+        $user = User::findOrFail($id);
+        $persona = Persona::findOrFail($id);
+
+        $administrativo->delete();
+        $user->delete();
+        $persona->delete();
+
+        return redirect('administrativos')->with('mensaje', 'Administrativo eliminado con exito');
     }
 }

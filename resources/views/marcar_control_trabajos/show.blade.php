@@ -40,7 +40,7 @@
             {{ Auth::user()->persona->nombre }} {{ Auth::user()->persona->apellido_paterno }}
         </div>
     </div>
-    <br>
+    <!-- <br> -->
     <!-- Marcado -->
     <!-- @if (Auth()->user()->id_rol == 1)
                         @else -->
@@ -65,7 +65,6 @@
             <input type="hidden" name="hora_inicio" value="<?php date_default_timezone_set("America/New_York");
                                                             echo date("H:i:s"); ?>" name="hora_inicio" id='hora_inicio'>
 
-            <div>Tus coordenas:</div>
             <div class="col-5">
                 <input type="hidden" class="form-control" placeholder="lat" name="lat" id="lat">
             </div>
@@ -86,8 +85,8 @@
     </div>
     @endif
 
+    @if (is_null($marcado))
     <div>
-        @if (is_null($marcado))
         @else
         <label for="">Usted Marco su entrada a las: {{ $marcado->hora_inicio }}</label>
         <form action="{{ route('marcar_control_trabajos', $marcado->id) }}" method="POST">
@@ -113,12 +112,10 @@
                 Marcar horario de salida
             </button>
         </form>
-        @endif
     </div>
+    @endif
     <!-- @endif -->
     <!-- coordenadas cliente -->
-    <div>Coordenadas cliente</div>
-    <button onclick="getDistanciaMetros()">Distancia</button>
 
 
     <br>

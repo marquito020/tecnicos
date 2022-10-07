@@ -119,7 +119,7 @@
     <!-- @endif -->
 
     <!-- button home -->
-    <a href="{{ route('inicio') }}" style="margin: 20px;" class="button">Volver</a>
+    <a href="{{ route('home') }}" style="margin: 20px;" class="button">Volver</a>
     @csrf
     <div class="mapform">
         <div id="map"></div>

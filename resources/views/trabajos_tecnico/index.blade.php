@@ -18,7 +18,6 @@
             <th>Tecnico</th>
             <th>Administrativo</th>
             <th>Cliente</th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -30,13 +29,6 @@
             <td>{{ $trabajo_asignado->tecnico->persona->nombre }}</td>
             <td>{{ $trabajo_asignado->administrativo->persona->nombre}}</td>
             <td>{{$trabajo_asignado->formularioCliente->cliente->persona->nombre}}</td>
-            <td>
-                <form action="{{ url('/trabajo_asignados/'.$trabajo_asignado->id) }}" method="post" style="display:inline">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
-                    <button class="btn btn-danger" type="submit" onclick="return confirm('¿Borrar?');">Borrar</button>
-                </form>
-            </td>
         </tr>
         @endforeach
     </tbody>

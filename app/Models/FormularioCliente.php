@@ -31,4 +31,9 @@ class FormularioCliente extends Model
     {
         return $this->belongsTo(Cliente::class, 'id_cliente');
     }
+
+    public function trabajo_asignado()
+    {
+        return $this->hasOne(TrabajoAsignado::class, 'id_formulario_cliente');
+    }
 }
