@@ -24,6 +24,7 @@ use App\Http\Controllers\AsignarTrabajoController;
 /* Control trabajo */
 use App\Http\Controllers\ControlTrabajoController;
 use App\Http\Controllers\CrearFormularioClienteController;
+use App\Http\Controllers\DatosPersonalesController;
 /* Marcar control trabajo */
 use App\Http\Controllers\MarcarControlTrabajoController;
 use App\Http\Controllers\TrabajosTecnico;
@@ -101,3 +102,6 @@ Route::resource('trabajos_tecnico', TrabajosTecnico::class)->middleware('auth');
 /* Vista Clientes */
 /* Cliente crea formulario */
 Route::resource('cliente_crea_formularios', CrearFormularioClienteController::class)->middleware('auth');
+
+/* Datos Personales */
+Route::resource('datos_personales', DatosPersonalesController::class)->middleware('auth');
