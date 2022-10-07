@@ -13,6 +13,8 @@ use App\Models\Persona;
 use App\Models\FormularioCliente;
 /* trabajo asignado */
 use App\Models\TrabajoAsignado;
+/* Cliente  */
+use App\Models\Cliente;
 
 
 class ApiAsistencia extends Controller
@@ -122,47 +124,103 @@ class ApiAsistencia extends Controller
 
     public function trabajo_asignado(Request $request)
     {
-        $trabajoAsignado = TrabajoAsignado::where('id_tecnico', $request->user)->first();
+        $trabajoAsignado = TrabajoAsignado::where('id', $request->id_trabajo)->first();
         /* $datos = Asistencia::where('id_tecnico', $request->user)->first(); */
-        if ($trabajoAsignado == null || $trabajoAsignado->estado == 'Finalizado') {
+        if ($trabajoAsignado == null /* || $trabajoAsignado->estado == 'Finalizado' */) {
             return response()->json([
                 /* 'trabajoAsignado' => $trabajoAsignado, */
                 'message' => 'No hay trabajos asignados'
             ]);
         } else {
-            $formualrio = FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->first();
+            $formulario = FormularioCliente::where('id', $request->id_trabajo)->first();
             return response()->json([
                 'trabajoAsignado' => $trabajoAsignado,
-                'formulario' => $formualrio
+                'formulario' => $formulario,
             ]);
         }
     }
 
+    public function datos_trabajos_asignados(Request $request)
+    {
+        $trabajoAsignado = TrabajoAsignado::where('id_tecnico', $request->user)->get();
+        $formualrio = FormularioCliente::all();
+        foreach ($trabajoAsignado as $trabajo) {
+            foreach ($formualrio as $formulario) {
+                if ($trabajo->id_formulario_cliente == $formulario->id) {
+                    $trabajo->formulario = $formulario;
+                }
+            }
+        }
+        if ($trabajoAsignado == null) {
+            /* return Cliente::all(); */
+            return response()->json([
+                'trabajoAsignado' => $trabajoAsignado,
+                'message' => 'No hay datos'
+            ]);
+        } else {
+            return $trabajoAsignado;
+        }
+    }
+
+
+
+    public function distancia($latiude1, $longitude1, $latitude2, $longitude2)
+    {
+        $earth_radius = 6371;
+
+        $dLat = deg2rad($latitude2 - $latiude1);
+        $dLon = deg2rad($longitude2 - $longitude1);
+
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos(deg2rad($latiude1)) * cos(deg2rad($latitude2)) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        $d = $earth_radius * $c;
+
+        return $d;
+    }
+
+
     public function trabajo_asignado_inicio(Request $request)
     {
-        $trabajoAsignado = TrabajoAsignado::where('id_tecnico', $request->user)->first();
+        $trabajoAsignado = TrabajoAsignado::where('id', $request->id_trabajo)->latest()->first();
         $controlTrabajo = ControlTrabajo::where('id_trabajo_asignado', $trabajoAsignado->id)
-            ->where('fecha', null)->first();
+            ->where('fecha', null)->latest()->first();
         if ($controlTrabajo == null) {
-            $controlTrabajo = ControlTrabajo::create([
-                'id_trabajo_asignado' => $trabajoAsignado->id,
-                'fecha' => date('Y-m-d'),
-                'hora_inicio' => date('H:i:s'),
-                'latitude_inicio' => $request->latitude,
-                'longitude_inicio' => $request->longitude,
-            ]);
-            Tecnico::where('id', $request->user)->update([
-                'estado' => 'En proceso',
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-            ]);
-            FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->update([
-                'estado' => 'En proceso'
-            ]);
-            return response()->json([
-                'controlTrabajo' => $controlTrabajo,
-                'message' => 'Asistencia registrada'
-            ]);
+
+
+            $formualrio = FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->latest()->first();
+            $latitude1 = $formualrio->latitude;
+            $longitude1 = $formualrio->longitude;
+            $latitude2 = $request->latitude;
+            $longitude2 = $request->longitude;
+            $distancia = $this->distancia($latitude1, $longitude1, $latitude2, $longitude2);
+
+            if ($distancia <= 0.5) {
+
+                $controlTrabajo = ControlTrabajo::create([
+                    'id_trabajo_asignado' => $trabajoAsignado->id,
+                    'fecha' => date('Y-m-d'),
+                    'hora_inicio' => date('H:i:s'),
+                    'latitude_inicio' => $request->latitude,
+                    'longitude_inicio' => $request->longitude,
+                ]);
+                Tecnico::where('id', $request->user)->update([
+                    'estado' => 'En proceso',
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                ]);
+                FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->update([
+                    'estado' => 'En proceso'
+                ]);
+                return response()->json([
+                    'controlTrabajo' => $controlTrabajo,
+                    'message' => 'Asistencia registrada'
+                ]);
+            } else {
+                return response()->json([
+                    'controlTrabajo' => $controlTrabajo,
+                    'message' => 'No se encuentra en el lugar'
+                ]);
+            }
         } else {
             return response()->json([
                 'controlTrabajo' => $controlTrabajo,
@@ -173,9 +231,9 @@ class ApiAsistencia extends Controller
 
     public function trabajo_asignado_fin(Request $request)
     {
-        $trabajoAsignado = TrabajoAsignado::where('id_tecnico', $request->user)->first();
+        $trabajoAsignado = TrabajoAsignado::where('id', $request->id_trabajo)->latest()->first();
         $controlTrabajo = ControlTrabajo::where('id_trabajo_asignado', $trabajoAsignado->id)
-            ->where('hora_fin', null)->first();
+            ->where('hora_fin', null)->latest()->first();
         if ($controlTrabajo == null) {
 
             return response()->json([
@@ -183,31 +241,41 @@ class ApiAsistencia extends Controller
                 'message' => 'No hay trabajos asignados'
             ]);
         } else {
-            /* $controlTrabajo = ControlTrabajo::create([
-                'id_trabajo_asignado' => $trabajoAsignado->id,
-                'fecha' => date('Y-m-d'),
-                'hora_inicio' => date('H:i:s'),
-                'latitude_inicio' => $request->latitude,
-                'longitude_inicio' => $request->longitude,
-            ]); */
-            ControlTrabajo::where('id', $controlTrabajo->id)
-                ->update([
-                    'hora_fin' => date('H:i:s'),
-                    'latitude_fin' => $request->latitude,
-                    'longitude_fin' => $request->longitude,
+
+
+            $formualrio = FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->latest()->first();
+            $latitude1 = $formualrio->latitude;
+            $longitude1 = $formualrio->longitude;
+            $latitude2 = $request->latitude;
+            $longitude2 = $request->longitude;
+            $distancia = $this->distancia($latitude1, $longitude1, $latitude2, $longitude2);
+
+
+            if ($distancia <= 0.5) {
+                ControlTrabajo::where('id', $controlTrabajo->id)
+                    ->update([
+                        'hora_fin' => date('H:i:s'),
+                        'latitude_fin' => $request->latitude,
+                        'longitude_fin' => $request->longitude,
+                    ]);
+                Tecnico::where('id', $request->user)->update([
+                    'estado' => 'En servicio',
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
                 ]);
-            Tecnico::where('id', $request->user)->update([
-                'estado' => 'Disponible',
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-            ]);
-            FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->update([
-                'estado' => 'Realizado'
-            ]);
-            return response()->json([
-                'controlTrabajo' => $controlTrabajo,
-                'message' => 'Asistencia registrada'
-            ]);
+                FormularioCliente::where('id', $trabajoAsignado->id_formulario_cliente)->update([
+                    'estado' => 'Realizado'
+                ]);
+                return response()->json([
+                    'controlTrabajo' => $controlTrabajo,
+                    'message' => 'Asistencia registrada'
+                ]);
+            } else {
+                return response()->json([
+                    'controlTrabajo' => $controlTrabajo,
+                    'message' => 'No se encuentra en el lugar'
+                ]);
+            }
         }
     }
 }

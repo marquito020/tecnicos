@@ -15,7 +15,7 @@
 
 
 <div class="row justify-content">
-        <a href="{{url('empleado/create')}}" class="button">Registrar Cliente</a>
+        <a href="{{url('clientes/create')}}" class="button">Registrar Cliente</a>
         <!-- <br /> -->
         <!-- Button Home -->
         <a href="{{url('/home')}}" class="button">Volver</a>

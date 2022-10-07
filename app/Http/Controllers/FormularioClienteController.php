@@ -37,8 +37,8 @@ class FormularioClienteController extends Controller
         /* servicio */
         $datos['servicios'] = Servicio::all();
         /* cliente */
-        $datos['clientes'] = Cliente::all();
-        return view('formularios.create', $datos);
+        $cliente['clientes'] = Cliente::all();
+        return view('formularios.create', $datos, $cliente);
     }
 
     /**
@@ -60,8 +60,7 @@ class FormularioClienteController extends Controller
             'estado' => 'required|string|max:100',
             'lat' => 'required|string|max:100',
             'lng' => 'required|string|max:100',
-            'id_servicio' => 'required|integer',
-            'id_cliente' => 'required|integer',
+            'id_servicio' => 'required|integer'
         ];
         $mensaje = [
             'required' => 'El :attribute es requerido',

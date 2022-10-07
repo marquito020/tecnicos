@@ -33,4 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/trabajo_asignado', [ApiAsistencia::class, 'trabajo_asignado']);
     Route::post('/trabajo_asignado_inicio', [ApiAsistencia::class, 'trabajo_asignado_inicio']);
     Route::post('/trabajo_asignado_fin', [ApiAsistencia::class, 'trabajo_asignado_fin']);
+
+    Route::post('/datos_trabajos_asignados', [ApiAsistencia::class, 'datos_trabajos_asignados']);
 });

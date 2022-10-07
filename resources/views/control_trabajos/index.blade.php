@@ -10,6 +10,10 @@
 @endif
 
 <h3>{{ __('Control Trabajo') }}</h3>
+
+<!-- button volver -->
+<a href="{{ url('home') }}" class="button">Volver</a>
+
 <table class="table table-night">
     <thead class="thead-night">
         <tr>
@@ -23,12 +27,11 @@
     <tbody>
         @foreach($control_trabajos as $control_trabajo)
         <tr>
-            <td>{{$control_trabajo->trabajoAsignado->tecnico->nombre}}</td>
+            <td>{{$control_trabajo->trabajoAsignado->tecnico->persona->nombre}}</td>
             <td>{{$control_trabajo->fecha}}</td>
             <td>{{$control_trabajo->hora_inicio}}</td>
             <td>{{$control_trabajo->hora_fin}}</td>
             <td>
-                <a href="{{url('control_trabajos/'.$control_trabajo->id.'/edit')}}" class="btn btn-warning">Editar</a>
                 <form action="{{url('control_trabajos/'.$control_trabajo->id)}}" method="post" style="display:inline">
                     @csrf
                     {{method_field('DELETE')}}

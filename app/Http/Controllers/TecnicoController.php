@@ -129,8 +129,17 @@ class TecnicoController extends Controller
      * @param  \App\Models\Tecnico  $tecnico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tecnico $tecnico)
+    public function destroy($id)
     {
         //
+        $tecnico = Tecnico::findOrFail($id);
+        $persona = Persona::findOrFail($id);
+        $user = User::findOrFail($id);
+
+        $tecnico->delete();
+        $persona->delete();
+        $user->delete();
+
+        return redirect('tecnicos')->with('Mensaje', 'Tecnico eliminado con exito');
     }
 }

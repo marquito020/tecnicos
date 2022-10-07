@@ -26,6 +26,9 @@ use App\Http\Controllers\ControlTrabajoController;
 use App\Http\Controllers\CrearFormularioClienteController;
 /* Marcar control trabajo */
 use App\Http\Controllers\MarcarControlTrabajoController;
+use App\Http\Controllers\TrabajosTecnico;
+/* Trabajos Tecnico */
+use App\Http\Controllers\TrabajosTecnicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,14 +53,31 @@ Route::group(['middleware' => 'auth'], function () {
 });
 Route::get('/home', [HomeController::class, 'index']);
 
+/* Vistas para administradores */
 Route::resource('tecnicos', TecnicoController::class)->middleware('auth');
 
 Route::resource('clientes', ClienteController::class)->middleware('auth');
+
+/* administrativos */
+Route::resource('administrativos', AdministrativoController::class)->middleware('auth');
 
 Route::resource('formularioClientes', FormularioClienteController::class)->middleware('auth');
 
 Route::resource('asistencias', AsistenciaController::class)->middleware('auth')->names('asistencia');
 
+/* Servicios */
+Route::resource('servicios', ServicioController::class)->middleware('auth');
+
+/* Asignar Trabajo */
+Route::resource('asignar_trabajos', AsignarTrabajoController::class)->middleware('auth');
+
+/* Control Trabajo */
+Route::resource('control_trabajos', ControlTrabajoController::class)->middleware('auth');
+
+/* trabajos asignados */
+Route::resource('trabajo_asignados', TrabajoAsignadoController::class)->middleware('auth');
+
+/* Vista Tecnicos */
 /* ruta marcado */
 Route::get('marcado', [VerificationController::class, 'marcado'])
     ->name('marcado')->middleware('auth');
@@ -70,30 +90,14 @@ Route::post('marcarEntrada', [VerificationController::class, 'marcarEntrada'])
 Route::put('marcarSalida/{marcado}', [VerificationController::class, 'marcarSalida'])
     ->name('marcarSalida')->middleware('auth');
 
-/* Servicios */
-Route::resource('servicios', ServicioController::class)->middleware('auth');
-
-/* administrativos */
-Route::resource('administrativos', AdministrativoController::class)->middleware('auth');
-
-/* trabajos asignados */
-Route::resource('trabajo_asignados', TrabajoAsignadoController::class)->middleware('auth');
-
-/* Asignar Trabajo */
-Route::resource('asignar_trabajos', AsignarTrabajoController::class)->middleware('auth');
-
-/* Control Trabajo */
-Route::resource('control_trabajos', ControlTrabajoController::class)->middleware('auth');
-
 /* Marcar Control Trabajos */
 Route::resource('marcar_control_trabajos', MarcarControlTrabajoController::class)->middleware('auth');
 Route::put('marcar_control_trabajos/{id}', [MarcarControlTrabajoController::class, 'update'])
     ->name('marcar_control_trabajos')->middleware('auth');
 
-/* Inicio */
-Route::get('inicio', function () {
-    return view('inicio');
-})->name('inicio');
+/* trabajos tecnico */
+Route::resource('trabajos_tecnico', TrabajosTecnico::class)->middleware('auth');
 
+/* Vista Clientes */
 /* Cliente crea formulario */
 Route::resource('cliente_crea_formularios', CrearFormularioClienteController::class)->middleware('auth');

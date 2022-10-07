@@ -146,7 +146,7 @@ class MarcarControlTrabajoController extends Controller
         FormularioCliente::where('id', '=', $formulario->id)->update(['estado' => 'Realizado']);
 
         /* Update Formulario Cliente */
-        Tecnico::where('id', '=', auth()->user()->id)->update(['estado' => 'Disponible']);
+        Tecnico::where('id', '=', auth()->user()->id)->update(['estado' => 'En servicio']);
         Tecnico::where('id', '=', auth()->user()->id)->update(['latitude' => $datosControlTrabajo['lat']]);
         Tecnico::where('id', '=', auth()->user()->id)->update(['longitude' => $datosControlTrabajo['lng']]);
 
