@@ -440,9 +440,10 @@ td {
 }
 
 .main-blog {
-    background-image: url("https://assets.codepen.io/3364143/skate-removebg-preview.png");
-    background-size: 80%;
-    background-position-x: 150px;
+    /* background-image: url("https://assets.codepen.io/3364143/skate-removebg-preview.png"); */
+    background-image: url(/images/electrico.png);
+    background-size: 30%;
+    background-position-x: 290px;
     background-color: #31abbd;
     display: flex;
     flex-direction: column;

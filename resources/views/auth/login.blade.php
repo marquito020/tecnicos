@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 
 <body>
